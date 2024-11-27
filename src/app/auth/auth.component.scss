@@ -1,0 +1,18 @@
+.error {
+  color: red;
+}
+.invalid {
+  border: 1px solid red;
+}
+
+.signInPassWrapper {
+  position: relative;
+  span {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    display: block;
+    transform: translate(-10px, -50%);
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,33 @@
+<div>
+  <div>
+    <div>
+      <label class="backButtonWrapper" for="" (click)="navigateToBack()">
+        <img width="20" height="20" src="https://img.icons8.com/forma-bold/24/long-arrow-left.png" alt="long-arrow-left"/>
+        <span>Back to blogs</span>
+      </label>
+    </div>
+  </div>
+  <div class="blogLoading" *ngIf="isLoading"><app-loader></app-loader></div>
+  <div *ngIf="!isLoading">
+    <div class="blogImageWrapper">
+      <!-- image -->
+      <img
+        class="img-responsive"
+        src="{{ blogContent.photo_url }}"
+        alt="blog image"
+      />
+    </div>
+    <div class="col-xs-12 col-md-8 mx-auto">
+      <!-- blog content -->
+      <div class="mt-4">
+        <span class="text-muted">{{ blogContent.created_at | date }} - </span>
+        <span class="badge bg-primary rounded-pill">{{
+          blogContent.category
+        }}</span>
+      </div>
+      <h1 class="text-primary">{{ blogContent.title }}</h1>
+      <hr />
+      <div [innerHTML]="blogContent.content_html"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,181 @@
+<div class="row">
+  <div class="col-12 col-xs-6 mx-auto">
+    <div class="col-12 col-md-6 mx-auto mt-5" *ngIf="isLoginMode">
+      <div class="mb-5">
+        <h1 class="text-center">Login</h1>
+      </div>
+      <form [formGroup]="signIn" (ngSubmit)="onSignIn()">
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" class="form-control" name="email" [ngClass]="{
+              invalid:
+                (!signIn.get('email')?.valid && signIn.get('email')?.dirty) ||
+                (signIn.get('email')?.touched && !signIn.get('email')?.dirty)
+            }" placeholder="Enter your email address" formControlName="email" required />
+          <p class="help-block error" *ngIf="
+              (!signIn.get('email')?.valid && signIn.get('email')?.dirty) ||
+              (signIn.get('email')?.touched && !signIn.get('email')?.dirty)
+            ">
+            Please enter a valid email
+          </p>
+        </div>
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <div class="signInPassWrapper">
+            <input [type]="passwordVisible ? 'text' : 'password'" id="password" class="form-control" name="password"
+              placeholder="Enter your email address" formControlName="password" [ngClass]="{
+                invalid:
+                  (!signIn.get('password')?.valid &&
+                    signIn.get('password')?.dirty) ||
+                  (signIn.get('password')?.touched &&
+                    !signIn.get('password')?.dirty)
+              }" required />
+            <span (click)="changePasswordVisiblity('passwordSignIn')"><img width="24" height="24"
+                src="https://img.icons8.com/parakeet-line/48/visible.png" alt="visible--v1"
+                *ngIf="!passwordVisible" /><img width="24" height="24" src="https://img.icons8.com/ios/50/hide.png"
+                alt="hide" *ngIf="passwordVisible" /></span>
+          </div>
+
+          <p class="help-block error" *ngIf="
+              (!signIn.get('password')?.valid &&
+                signIn.get('password')?.dirty) ||
+              (signIn.get('password')?.touched &&
+                !signIn.get('password')?.dirty)
+            ">
+            Password should be minimum length is 8 characters.
+          </p>
+        </div>
+        <div class="my-2">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+      <div class="my-3">
+        Don't have an account?
+        <span class="text-primary" (click)="onChangeAuth()" style="cursor: pointer">Signup</span>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 mx-auto mt-5" *ngIf="!isLoginMode">
+      <div class="mb-5">
+        <h1 class="text-center">Signup</h1>
+      </div>
+      <form [formGroup]="signUp" (ngSubmit)="onSignUp()">
+        <div class="row">
+          <div class="col-12 col-sm-6 form-group">
+            <label for="firstname" class="form-label">First Name</label>
+            <input type="text" id="firstname" class="form-control" name="firstname" formControlName="firstname"
+              placeholder="First Name" [ngClass]="{
+                invalid:
+                  (!signUp.get('firstname')?.valid &&
+                    signUp.get('firstname')?.dirty) ||
+                  (signUp.get('firstname')?.touched &&
+                    !signUp.get('firstname')?.dirty)
+              }" required />
+            <p class="help-block error" *ngIf="
+                (!signUp.get('firstname')?.valid &&
+                  signUp.get('firstname')?.dirty) ||
+                (signUp.get('firstname')?.touched &&
+                  !signUp.get('firstname')?.dirty)
+              ">
+              First name is required
+            </p>
+          </div>
+          <div class="col-12 col-sm-6 form-group">
+            <label for="lastname" class="form-label">Last Name</label>
+            <input type="text" id="lastname" name="lastname" formControlName="lastname" class="form-control"
+              placeholder="Last Name" [ngClass]="{
+                invalid:
+                  (!signUp.get('lastname')?.valid &&
+                    signUp.get('lastname')?.dirty) ||
+                  (signUp.get('lastname')?.touched &&
+                    !signUp.get('lastname')?.dirty)
+              }" required />
+            <p class="help-block error" *ngIf="
+                (!signUp.get('lastname')?.valid &&
+                  signUp.get('lastname')?.dirty) ||
+                (signUp.get('lastname')?.touched &&
+                  !signUp.get('lastname')?.dirty)
+              ">
+              First name is required
+            </p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" class="form-control" name="email" formControlName="email"
+            placeholder="Enter your email address" [ngClass]="{
+              invalid:
+                (!signUp.get('email')?.valid && signUp.get('email')?.dirty) ||
+                (signUp.get('email')?.touched && !signUp.get('email')?.dirty)
+            }" required />
+          <p class="help-block error" *ngIf="
+              (!signUp.get('email')?.valid && signUp.get('email')?.dirty) ||
+              (signUp.get('email')?.touched && !signUp.get('email')?.dirty)
+            ">
+            Enter Valid Email
+          </p>
+        </div>
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <div class="signInPassWrapper">
+            <input type="{{ passwordVisibleSignUp ? 'text' : 'password' }}" id="password" class="form-control"
+              name="password" formControlName="password" placeholder="Enter Password" [ngClass]="{
+                invalid:
+                  (!signUp.get('password')?.valid &&
+                    signUp.get('password')?.dirty) ||
+                  (signUp.get('password')?.touched &&
+                    !signUp.get('password')?.dirty)
+              }" required />
+            <span (click)="changePasswordVisiblity('passwordSignUp')"><img width="24" height="24"
+                src="https://img.icons8.com/parakeet-line/48/visible.png" alt="visible--v1"
+                *ngIf="!passwordVisibleSignUp" /><img width="24" height="24"
+                src="https://img.icons8.com/ios/50/hide.png" alt="hide" *ngIf="passwordVisibleSignUp" /></span>
+          </div>
+          <p class="help-block error" *ngIf="
+              (!signUp.get('password')?.valid &&
+                signUp.get('password')?.dirty) ||
+              (signUp.get('password')?.touched &&
+                !signUp.get('password')?.dirty)
+            ">
+            Password should be minimum length is 8 characters.
+          </p>
+        </div>
+        <div class="form-group">
+          <label for="confirmpassword" class="form-label">Confirm Password</label>
+          <div class="signInPassWrapper">
+            <input type="{{ confirmPasswordVisible ? 'text' : 'password' }}" id="confirmpassword" class="form-control"
+              name="confirmpassword" formControlName="confirmpassword" placeholder="Ponfirm Password" [ngClass]="{
+                'invalid':
+                  (!signUp.get('confirmpassword')?.valid &&
+                    signUp.get('confirmpassword')?.dirty) ||
+                  (signUp.get('confirmpassword')?.touched &&
+                    !signUp.get('confirmpassword')?.dirty) || signUp.get('confirmpassword')?.errors?.['confirmPAsswordError'] && (signUp.get('confirmpassword')?.touched )
+              }" required />
+            <span (click)="changePasswordVisiblity('confirmPassword')"><img width="24" height="24"
+                src="https://img.icons8.com/parakeet-line/48/visible.png" alt="visible--v1"
+                *ngIf="!confirmPasswordVisible" /><img width="24" height="24"
+                src="https://img.icons8.com/ios/50/hide.png" alt="hide" *ngIf="confirmPasswordVisible" /></span>
+          </div>
+          <p class="help-block error" *ngIf="
+              (!signUp.get('confirmpassword')?.valid &&
+                  signUp.get('confirmpassword')?.dirty) ||
+                (signUp.get('confirmpassword')?.touched &&
+                  !signUp.get('confirmpassword')?.dirty) || signUp.get('confirmpassword')?.errors?.['confirmPAsswordError'] &&(signUp.get('confirmpassword')?.touched )
+            ">
+            Password and Confirm Password are not matched
+          </p>
+        </div>
+        <div class="my-2">
+          <button class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+      <div class="my-3">
+        Have an account?
+        <span class="text-primary" (click)="onChangeAuth()" style="cursor: pointer">Log in</span>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 mx-auto mt-5 alert alert-danger" role="alert" *ngIf="error">
+      {{ error }}
+    </div>
+  </div>
+</div>
